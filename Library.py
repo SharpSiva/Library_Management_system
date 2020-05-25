@@ -1,7 +1,7 @@
 class Library:
     try:
         def __init__(self):
-            import pyodbc
+            import pyodbc #pyodbc-Open DataBase Connectivity for Python.
             self.db = pyodbc.connect('Driver=SQL Server;'
                                  'server=localhost;'
                                  'Database=Library;'
