@@ -1,3 +1,4 @@
+from datetime import date
 class Library:
     try:
         def __init__(self):
@@ -27,8 +28,11 @@ class Library:
                     self.cursor.execute(
                         "update tbl_library_master set current_status='Lended' where books_name='" + requestedbook + "'")
                     if self.cursor.rowcount > 0:
+                        Lended_date=date.today()
+                        self.cursor.execute("update tbl_library_master set Book_Taken='"+ str(Lended_date) +"' where books_name='"+requestedbook+"'")
                         self.db.commit()
                         print("Successful! You Lented " + requestedbook)
+                        print("Booked Lented on",Lended_date)
                     else:
                         print("Please enter the vaild book name!.")
 
@@ -48,8 +52,11 @@ class Library:
                     self.cursor.execute(
                         "update tbl_library_master set current_status='Available' where books_name='" + returnedbook + "'")
                     if self.cursor.rowcount > 0:
+                        Returned_date = date.today()
+                        self.cursor.execute("update tbl_library_master set BooK_Returned='" + str(Returned_date) + "' where books_name='" + returnedbook + "'")
                         self.db.commit()
                         print("Successful! You Returned the  " + returnedbook + " book.")
+                        print("Returned On ",Returned_date)
                     else:
                         print("Already exist!")
                 else:
